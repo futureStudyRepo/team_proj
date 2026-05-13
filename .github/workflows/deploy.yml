@@ -18,12 +18,10 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            source ~/miniconda3/etc/profile.d/conda.sh
-            conda activate bio4
             cd ~/workspace/team_proj
             git pull origin main
+            source ~/miniconda3/etc/profile.d/conda.sh
+            conda activate bio4
             pip install -r requirements.txt
-            pkill -f "python main.py" || true
-            sleep 2
-            nohup python main.py > app.log 2>&1 < /dev/null &
-            sleep 3
+            tmux kill-session -t myapp 2>/dev/null || true
+            tmux new-session -d -s myapp ~/start_app.sh
