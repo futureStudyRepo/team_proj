@@ -23,4 +23,5 @@ jobs:
             cd ~/workspace/team_proj
             git pull origin main
             pip install -r requirements.txt
-            pm2 restart myapp
+            pkill -f "python app/main.py" || true
+            nohup python app/main.py > app.log 2>&1 &
