@@ -18,7 +18,6 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            script: |
               cd ~/workspace/team_proj
               git pull origin main
             
