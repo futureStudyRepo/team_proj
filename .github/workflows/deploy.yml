@@ -20,8 +20,16 @@ jobs:
           script: |
             cd ~/workspace/team_proj
             git pull origin main
+
             source ~/miniconda3/etc/profile.d/conda.sh
             conda activate bio4
+
             pip install -r requirements.txt
+
             tmux kill-session -t myapp 2>/dev/null || true
-            tmux new-session -d -s myapp ~/start_app.sh
+
+            tmux new-session -d -s myapp "bash -lc '~/start_app.sh > ~/myapp.log 2>&1'"
+
+            sleep 3
+
+            tmux has-session -t myapp || (cat ~/myapp.log && exit 1)
