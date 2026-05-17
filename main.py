@@ -6,12 +6,12 @@ app = FastAPI(title="My FastAPI App")
 
 @app.get("/")
 def root():
-    return {"message": "Hello GitHub Actions! v1"}
+    return {"message": "Hello GitHub Actions! v1 test"}
 
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok test"}
 
 
 
